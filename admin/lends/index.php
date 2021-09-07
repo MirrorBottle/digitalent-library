@@ -1,6 +1,6 @@
 <?php include('../../layouts/header.php') ?>
 <?php 
-  $members = all("members");
+  $lends = query("SELECT * FROM lends WHERE return_date IS NULL ORDER BY id DESC");
 ?>
 <div id="main-container" class="container-fluid">
   <div class="row">
@@ -9,33 +9,42 @@
       <?php include("../../layouts/flash.php") ?>
       <div class="card mt-4">
         <div class="card-header d-flex align-items-center justify-content-between">
-          <h4>Daftar Anggota</h4>
+          <h4>Daftar Peminjaman</h4>
           <a href="./create.php" class="btn btn-primary">
             <i class="lni lni-plus me-2"></i>
             Tambah
           </a>
         </div>
         <div class="card-body">
-          <table id="datatable" class="table table-striped table-bordered datatable">
+          <table id="datatable" class="table table-striped table-bordered ">
             <thead>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">ID</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Email</th>
-                <th scope="col">Jenis Kelamin</th>
+                <th scope="col">Nama Peminjam</th>
+                <th scope="col">Buku Pinjaman</th>
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
             <tbody>
               <?php $i = 1; ?>
-                <?php foreach($members as $member): ?>
+                <?php foreach($lends as $lend): ?>
+                <?php $member = find("members", $lend['member_id']) ?>
+                <?php $books = lend_books($lend['id']) ?>
                 <tr>
                   <th scope="row"><?= $i ?></th>
-                  <td><?= $member['member_number'] ?></td>
+                  <td><?= $lend['number'] ?></td>
                   <td><?= $member['name'] ?></td>
-                  <td><?= $member['email'] ?></td>
-                  <td><?= $member['gender'] == 1 ? 'Perempuan' : 'Laki-laki' ?> </td>
+                  <td>
+                    <?php foreach($books as $index => $book): ?>
+                      <?php if($index <= 2): ?>
+                        <span class="badge bg-primary me-2 mt-1"><?= $book['title'] ?></span>
+                      <?php endif; ?>
+                    <?php endforeach; ?>
+                    <?php if(count($books) > 3): ?>
+                      <span class="badge bg-primary me-2 mt-1">...</span>
+                    <?php endif; ?>
+                  </td>
                   <td>
                     <a href="./edit.php?id=<?= $member['id'] ?>" class="btn btn-warning me-1">Ubah</a>
                     <a href="./delete.php?id=<?= $member['id'] ?>" data-message="Data anggota akan dihapus!" class="btn btn-danger delete-btn">Hapus</a>

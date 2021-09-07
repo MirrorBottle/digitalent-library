@@ -1,6 +1,6 @@
 <?php include('../../layouts/header.php') ?>
 <?php
-  $book = findById("books", $_GET["id"]);
+  $book = find("books", $_GET["id"]);
 ?>
 <div id="main-container" class="container-fluid">
   <div class="row">

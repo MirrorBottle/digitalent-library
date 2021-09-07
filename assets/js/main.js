@@ -1,6 +1,8 @@
 $(function() {
   $("#datatable").DataTable();
 
+  $('.select2').select2();
+
   $(".delete-btn").on('click', function(e) {
     e.preventDefault();
     const message = $(this).data('message');

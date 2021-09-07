@@ -1,42 +1,44 @@
 <?php
 include('config.php');
 
-function all($table) {
-  global $connection;
-  $result = mysqli_query($connection, "SELECT * FROM $table ORDER BY id DESC");
+
+function query($query) {
+	global $connection;
+	$result = mysqli_query($connection, $query);
 	$rows = [];
 	while($row = mysqli_fetch_assoc($result) ) {
 		$rows[] = $row;
 	}
 	return $rows;
 }
+function all($table) {
+  $result = query("SELECT * FROM $table ORDER BY id DESC");
+	return $result;
+}
+
+function select($table, $selects) {
+	$selects = join(", ", $selects);
+  $result = query("SELECT $selects FROM $table ORDER BY id DESC");
+	return $result;
+}
 
 
-function findById($table, $id) {
-	global $connection;
-	$result = mysqli_query($connection, "SELECT * FROM $table WHERE id = $id");
-  $rows = [];
-	while($row = mysqli_fetch_assoc($result) ) {
-		$rows[] = $row;
-	}
-	return $rows[0];
+function find($table, $id) {
+	$result = query("SELECT * FROM $table WHERE id = $id");
+	return $result[0];
 }
 
 function last($table) {
-	global $connection;
-	$result = mysqli_query($connection, "SELECT * FROM $table ORDER BY id DESC LIMIT 1;");
-  $rows = [];
-	while($row = mysqli_fetch_assoc($result) ) {
-		$rows[] = $row;
-	}
-	return $rows[0];
+  $result = query("SELECT * FROM $table ORDER BY id DESC LIMIT 1;");
+	return $result[0];
 }
 
-function store($table) {
+function store($table, $data = [], $is_return_id = false) {
 	global $connection;
+	$data = count($data) > 0 ? $data : $_POST;
 	$fields = [];
 	$values = [];
-	foreach ($_POST as $key => $value) {
+	foreach ($data as $key => $value) {
 		$value = htmlspecialchars($value);
 		$fields[] = $key;
 		$values[] = "'$value'";
@@ -44,8 +46,8 @@ function store($table) {
 	$fields = join(", ", $fields);
 	$values = join(", ", $values);
 	$query = "INSERT INTO $table ($fields) VALUES ($values)";
-	mysqli_query($connection, $query);
-	return mysqli_affected_rows($connection) > 0;
+	$result = mysqli_query($connection, $query);
+	return $is_return_id ? mysqli_insert_id($connection) : mysqli_affected_rows($connection) > 0;
 	
 }
 
@@ -55,11 +57,12 @@ function delete($table, $id) {
 	return mysqli_affected_rows($connection) > 0;
 }
 
-function update($table) {
+function update($table, $data = []) {
 	global $connection;
-	$id = $_POST['id'];
+	$data = count($data) > 0 ? $data : $_POST;
+	$id = $data['id'];
 	$values = [];
-	foreach ($_POST as $key => $value) {
+	foreach ($data as $key => $value) {
 		$value = htmlspecialchars($value);
 		$values[] = "$key = '$value'";
 	}
@@ -116,4 +119,10 @@ function upload($field, $path = '../../img/') {
 function flash($message, $type) {
 	$_SESSION['flash'][$type] = $message;
 
+}
+
+// LEND
+function lend_books($id) {
+	$result = query("SELECT * FROM `lend_details` JOIN `books` ON `lend_details`.`book_id` = `books`.`id`  WHERE `lend_details`.`lend_id` = $id ");
+	return $result;
 }

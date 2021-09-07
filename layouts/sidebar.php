@@ -10,19 +10,25 @@
       <li class="nav-item">
         <a class="nav-link" href="/digitalent-library/admin/books/index.php">
           <i class="lni lni-bookmark"></i>
-          <span class="ms-1">Data Buku</span>
+          <span class="ms-1">Buku</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/digitalent-library/admin/members/index.php">
           <i class="lni lni-users"></i>
-          <span class="ms-1">Data Anggota</span>
+          <span class="ms-1">Anggota</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/digitalent-library/admin/lends/index.php">
+          <i class="lni lni-exit-up"></i>
+          <span class="ms-1">Peminjaman</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">
-          <i class="lni lni-files"></i>
-          <span class="ms-1">Transaksi</span>
+          <i class="lni lni-exit-down"></i>
+          <span class="ms-1">Pengembalian</span>
         </a>
       </li>
     </ul>
