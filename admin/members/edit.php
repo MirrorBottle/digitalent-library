@@ -16,7 +16,11 @@
             </a>
           </div>
           <div class="card-body">
-          <input value="<?= $member['id'] ?>" required type="hidden" name="id" class="form-control" id="id">
+            <input value="<?= $member['id'] ?>" required type="hidden" name="id" class="form-control" id="id">
+            <div class="mb-3">
+              <label for="member_number" class="form-label">ID Anggota</label>
+              <input disabled readonly value="<?= $member['member_number'] ?>" required type="text" name="member_number" class="form-control" id="member_number">
+            </div>
             <div class="mb-3">
               <label for="name" class="form-label">Nama</label>
               <input value="<?= $member['name'] ?>" required type="text" name="name" class="form-control" id="name">

@@ -1,4 +1,10 @@
 <?php include('../../layouts/header.php') ?>
+
+<?php
+  $last_user = last("members");
+  $curr_id  = $last_user ? str_pad(intval(explode("AP", $last_user['member_number'])[1]) + 1, 4, 0, STR_PAD_LEFT) : '0001';
+  
+?>
 <div id="main-container" class="container-fluid">
   <div class="row">
     <?php include("../../layouts/sidebar.php") ?>
@@ -13,6 +19,10 @@
             </a>
           </div>
           <div class="card-body">
+            <div class="mb-3">
+              <label for="member_number" class="form-label">ID Anggota</label>
+              <input readonly value="<?= "AP$curr_id" ?>" required type="text" name="member_number" class="form-control" id="member_number">
+            </div>
             <div class="mb-3">
               <label for="name" class="form-label">Nama</label>
               <input required type="text" name="name" class="form-control" id="name">

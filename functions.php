@@ -22,11 +22,22 @@ function findById($table, $id) {
 	return $rows[0];
 }
 
+function last($table) {
+	global $connection;
+	$result = mysqli_query($connection, "SELECT * FROM $table ORDER BY id DESC LIMIT 1;");
+  $rows = [];
+	while($row = mysqli_fetch_assoc($result) ) {
+		$rows[] = $row;
+	}
+	return $rows[0];
+}
+
 function store($table) {
 	global $connection;
 	$fields = [];
 	$values = [];
 	foreach ($_POST as $key => $value) {
+		$value = htmlspecialchars($value);
 		$fields[] = $key;
 		$values[] = "'$value'";
 	}
@@ -49,6 +60,7 @@ function update($table) {
 	$id = $_POST['id'];
 	$values = [];
 	foreach ($_POST as $key => $value) {
+		$value = htmlspecialchars($value);
 		$values[] = "$key = '$value'";
 	}
 	$values = join(", ", $values);

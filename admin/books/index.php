@@ -20,6 +20,7 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
+                <th scope="col">Cover</th>
                 <th scope="col">Nama Buku</th>
                 <th scope="col">Kategori Buku</th>
                 <th scope="col">Status</th>
@@ -31,6 +32,9 @@
               <?php foreach($books as $book): ?>
                 <tr>
                   <th scope="row"><?= $i ?></th>
+                  <td>
+                  <img class="img-fluid img-thumbnail" style="height: 150px;" id="cover-image-preview" src="/digitalent-library/img/<?= $book['cover'] ?>" alt="your image" />
+                  </td>
                   <td><?= $book['title'] ?></td>
                   <td><?= $book['category'] ?></td>
                   <td>

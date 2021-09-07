@@ -1,4 +1,7 @@
 <?php include("../layouts/header.php") ?>
+<?php 
+  $users = all("users");
+?>
 <div id="main-container" class="container-fluid">
   <div class="row">
     <?php include("../layouts/sidebar.php") ?>

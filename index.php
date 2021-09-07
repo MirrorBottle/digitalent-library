@@ -21,6 +21,11 @@
         <form action="login.php" class="form-signin" method="POST">
           <i class="lni lni-book fs-1 mb-3 brand-icon"></i>
           <h3 class="h3 mb-3 font-weight-normal text-left">Login</h3>
+          <?php if(isset($_GET['denied'])): ?>
+            <div class="alert alert-danger p-3 fade show" role="alert">
+              <span>Username atau password salah!</span>
+            </div>
+          <?php endif; ?>
           <div class="input-group mb-3">
             <span class="input-group-text">
               <i class="lni lni-user"></i>

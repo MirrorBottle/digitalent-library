@@ -20,9 +20,9 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
+                <th scope="col">ID</th>
                 <th scope="col">Nama</th>
                 <th scope="col">Email</th>
-                <th scope="col">No. HP</th>
                 <th scope="col">Jenis Kelamin</th>
                 <th scope="col">Aksi</th>
               </tr>
@@ -32,9 +32,9 @@
                 <?php foreach($members as $member): ?>
                 <tr>
                   <th scope="row"><?= $i ?></th>
+                  <td><?= $member['member_number'] ?></td>
                   <td><?= $member['name'] ?></td>
                   <td><?= $member['email'] ?></td>
-                  <td><?= $member['phone'] ?></td>
                   <td><?= $member['gender'] == 1 ? 'Perempuan' : 'Laki-laki' ?> </td>
                   <td>
                     <a href="./edit.php?id=<?= $member['id'] ?>" class="btn btn-warning me-1">Ubah</a>
