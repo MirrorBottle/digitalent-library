@@ -6,21 +6,17 @@
 aside {
   padding-top: 3rem;
   min-height: 100vh;
-  -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-          box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
   position: fixed;
 }
 
 aside .nav .nav-item {
   margin-bottom: 10px;
   padding: 7px 8px;
-  border-radius: 10px;
+  border-radius: 25px;
   -webkit-transition: .3s;
   transition: .3s;
-}
-
-aside .nav .nav-item a {
-  color: #222E38 !important;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
 aside .nav .nav-item:hover {

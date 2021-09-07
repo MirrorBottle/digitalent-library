@@ -1,5 +1,6 @@
 <?php include('../../layouts/header.php') ?>
 <?php 
+  use Carbon\Carbon;
   $lends = query("SELECT * FROM lends WHERE return_date IS NULL ORDER BY id DESC");
 ?>
 <div id="main-container" class="container-fluid">
@@ -21,6 +22,7 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">ID</th>
+                <th scope="col">Tanggal Peminjaman</th>
                 <th scope="col">Nama Peminjam</th>
                 <th scope="col">Buku Pinjaman</th>
                 <th scope="col">Aksi</th>
@@ -34,6 +36,7 @@
                 <tr>
                   <th scope="row"><?= $i ?></th>
                   <td><?= $lend['number'] ?></td>
+                  <td><?= Carbon::parse($lend['lend_date'])->format('d M, Y') ?></td>
                   <td><?= $member['name'] ?></td>
                   <td>
                     <?php foreach($books as $index => $book): ?>

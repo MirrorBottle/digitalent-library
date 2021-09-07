@@ -1,6 +1,9 @@
 <?php include('../../layouts/header.php') ?>
+
 <?php
-  $member = find("members", $_GET["id"]);
+  $id = $_GET["id"];
+  $lend = find("lends", $_GET["id"]);
+  $member = query("SELECT members.name FROM lends JOIN members ON lends.member_id = members.id WHERE lends.id = $id LIMIT 1")[0];
 ?>
 <div id="main-container" class="container-fluid">
   <div class="row">
@@ -16,33 +19,14 @@
             </a>
           </div>
           <div class="card-body">
-            <input value="<?= $member['id'] ?>" required type="hidden" name="id" class="form-control" id="id">
+            <input type="hidden" name="id" class="form-control" id="id" value="<?= $lend['id'] ?>">
             <div class="mb-3">
-              <label for="member_number" class="form-label">ID Anggota</label>
-              <input disabled readonly value="<?= $member['member_number'] ?>" required type="text" name="member_number" class="form-control" id="member_number">
+              <label for="id" class="form-label">ID Peminjaman</label>
+              <input readonly required type="text" name="return_date" class="form-control" id="return_date" value="<?= $lend['number'] ?> - - <?= $member['name'] ?>">
             </div>
             <div class="mb-3">
-              <label for="name" class="form-label">Nama</label>
-              <input value="<?= $member['name'] ?>" required type="text" name="name" class="form-control" id="name">
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input value="<?= $member['email'] ?>" required type="email" name="email" class="form-control" id="email">
-            </div>
-            <div class="mb-3">
-              <label for="phone" class="form-label">No. HP</label>
-              <input value="<?= $member['phone'] ?>" required type="tel" name="phone" class="form-control" id="phone">
-            </div>
-            <div class="mb-3">
-              <label for="gender" class="form-labe d-block mb-1">Jenis Kelamin</label>
-              <div div class="form-check form-check-inline">
-                <input <?= $member['gender'] == 0 ? 'checked' : '' ?> class="form-check-input" required type="radio" name="gender" id="man" value="0">
-                <label class="form-check-label" for="man">Laki-laki</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input <?= $member['gender'] == 1 ? 'checked' : '' ?> class="form-check-input" required type="radio" name="gender" id="female" value="1">
-                <label class="form-check-label" for="female">Perempuan</label>
-              </div>
+              <label for="return_date" class="form-label">Tanggal Kembali</label>
+              <input required type="date" name="return_date" class="form-control" id="return_date" value="<?= $lend['return_date'] ?>">
             </div>
           </div>
           <div class="card-footer d-flex align-items-center justify-content-end flex-row pt-2">

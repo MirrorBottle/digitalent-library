@@ -2,8 +2,12 @@
 session_start();
 include('../../functions.php');
 
-$result = update("members");
+$data = [
+  'id' => $_POST['id'],
+  'return_date' => $_POST['return_date']
+];
+$result = update("lends", $data);
 
-flash($result ? "Berhasil mengubah anggota" : "Gagal mengubah anggota", $result ? "success" : "error");
+flash($result ? "Berhasil mengubah pengembalian" : "Gagal mengubah pengembalian", $result ? "success" : "error");
 
 header("location:index.php");
