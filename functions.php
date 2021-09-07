@@ -51,12 +51,6 @@ function store($table, $data = [], $is_return_id = false) {
 	
 }
 
-function delete($table, $id) {
-	global $connection;
-	mysqli_query($connection, "DELETE FROM $table WHERE id = $id");
-	return mysqli_affected_rows($connection) > 0;
-}
-
 function update($table, $data = []) {
 	global $connection;
 	$data = count($data) > 0 ? $data : $_POST;
@@ -69,6 +63,19 @@ function update($table, $data = []) {
 	$values = join(", ", $values);
 	$query = "UPDATE $table SET $values WHERE id = $id";
 	mysqli_query($connection, $query);
+	return mysqli_affected_rows($connection) > 0;
+}
+
+function delete($table, $id) {
+	global $connection;
+	mysqli_query($connection, "DELETE FROM $table WHERE id = $id");
+	return mysqli_affected_rows($connection) > 0;
+}
+
+function delete_multiple($table, $ids) {
+	global $connection;
+	$ids = join(", ", array_map('intval', $ids));
+	mysqli_query($connection, "DELETE FROM $table WHERE id IN ($ids)");
 	return mysqli_affected_rows($connection) > 0;
 }
 
@@ -123,6 +130,6 @@ function flash($message, $type) {
 
 // LEND
 function lend_books($id) {
-	$result = query("SELECT * FROM `lend_details` JOIN `books` ON `lend_details`.`book_id` = `books`.`id`  WHERE `lend_details`.`lend_id` = $id ");
+	$result = query("SELECT *, `lend_details`.`id` as lend_detail_id FROM `lend_details` JOIN `books` ON `lend_details`.`book_id` = `books`.`id`  WHERE `lend_details`.`lend_id` = $id ");
 	return $result;
 }

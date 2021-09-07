@@ -1,6 +1,9 @@
 <?php include('../../layouts/header.php') ?>
 <?php
-  $member = find("members", $_GET["id"]);
+  $lend = find("lends", $_GET["id"]);
+  $books = query("SELECT id, title, author FROM books WHERE is_borrowed = 0 ORDER BY id DESC");
+  $lend_books = lend_books($lend['id']);
+  $members = select('members', ['id', 'member_number', 'name']);
 ?>
 <div id="main-container" class="container-fluid">
   <div class="row">
@@ -16,33 +19,39 @@
             </a>
           </div>
           <div class="card-body">
-            <input value="<?= $member['id'] ?>" required type="hidden" name="id" class="form-control" id="id">
+            <input value="<?= $lend['id'] ?>" required type="hidden" name="id" class="form-control" id="id">
             <div class="mb-3">
-              <label for="member_number" class="form-label">ID Anggota</label>
-              <input disabled readonly value="<?= $member['member_number'] ?>" required type="text" name="member_number" class="form-control" id="member_number">
+              <label for="number" class="form-label">ID Peminjaman</label>
+              <input readonly value="<?= $lend['number'] ?>" required type="text" name="number" class="form-control" id="number">
             </div>
             <div class="mb-3">
-              <label for="name" class="form-label">Nama</label>
-              <input value="<?= $member['name'] ?>" required type="text" name="name" class="form-control" id="name">
+              <label for="member_id" class="form-label">Anggota</label>
+              <select required name="member_id" id="member_id" class="form-select select2" aria-label="Default select example">
+                <?php foreach($members as $member): ?>
+                  <option <?= $member['id'] == $lend['member_id'] ? 'selected' : '' ?> value="<?= $member['id'] ?>">
+                    <?= $member['member_number'] ?> - <?= $member['name'] ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input value="<?= $member['email'] ?>" required type="email" name="email" class="form-control" id="email">
+              <label for="books" class="form-label">Buku Pinjaman</label>
+              <select required name="books[]" id="books" class="form-select select2" aria-label="Default select example" multiple>
+                <?php foreach($lend_books as $book): ?>
+                  <option selected value="<?= $book['id'] ?>">
+                    <?= $book['author'] ?> - <?= $book['title'] ?>
+                  </option>
+                <?php endforeach; ?>
+                <?php foreach($books as $book): ?>
+                  <option value="<?= $book['id'] ?>">
+                    <?= $book['author'] ?> - <?= $book['title'] ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
             </div>
             <div class="mb-3">
-              <label for="phone" class="form-label">No. HP</label>
-              <input value="<?= $member['phone'] ?>" required type="tel" name="phone" class="form-control" id="phone">
-            </div>
-            <div class="mb-3">
-              <label for="gender" class="form-labe d-block mb-1">Jenis Kelamin</label>
-              <div div class="form-check form-check-inline">
-                <input <?= $member['gender'] == 0 ? 'checked' : '' ?> class="form-check-input" required type="radio" name="gender" id="man" value="0">
-                <label class="form-check-label" for="man">Laki-laki</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input <?= $member['gender'] == 1 ? 'checked' : '' ?> class="form-check-input" required type="radio" name="gender" id="female" value="1">
-                <label class="form-check-label" for="female">Perempuan</label>
-              </div>
+              <label for="lend_date" class="form-label">Tanggal Peminjaman</label>
+              <input required type="date" name="lend_date" class="form-control" id="lend_date" value="<?= $lend['lend_date']; ?>">
             </div>
           </div>
           <div class="card-footer d-flex align-items-center justify-content-end flex-row pt-2">
