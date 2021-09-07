@@ -4,7 +4,7 @@
     <?php include("../../layouts/sidebar.php") ?>
     <main role="main" class="col-md-9 offset-md-3 offset-lg-2 ml-sm-auto col-lg-10 px-4">
       <div class="card mt-4">
-        <form>
+        <form action="store.php" method="POST" enctype="multipart/form-data">
           <div class="card-header d-flex align-items-center justify-content-between">
             <h4>Tambah Anggota</h4>
             <a href="./index.php" class="btn btn-danger">
@@ -15,15 +15,26 @@
           <div class="card-body">
             <div class="mb-3">
               <label for="name" class="form-label">Nama</label>
-              <input type="text" name="name" class="form-control" id="name">
+              <input required type="text" name="name" class="form-control" id="name">
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input type="email" name="email" class="form-control" id="email">
+              <input required type="email" name="email" class="form-control" id="email">
             </div>
             <div class="mb-3">
               <label for="phone" class="form-label">No. HP</label>
-              <input type="tel" name="phone" class="form-control" id="phone">
+              <input required type="tel" name="phone" class="form-control" id="phone">
+            </div>
+            <div class="mb-3">
+              <label for="gender" class="form-labe d-block mb-1">Jenis Kelamin</label>
+              <div div class="form-check form-check-inline">
+                <input class="form-check-input" required type="radio" name="gender" id="man" value="0">
+                <label class="form-check-label" for="man">Laki-laki</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" required type="radio" name="gender" id="female" value="1">
+                <label class="form-check-label" for="female">Perempuan</label>
+              </div>
             </div>
           </div>
           <div class="card-footer d-flex align-items-center justify-content-end flex-row pt-2">
