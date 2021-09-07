@@ -2,19 +2,19 @@
   <div class="sidebar-sticky">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link active" href="/">
+        <a class="nav-link active" href="/digitalent-library/admin/index.php">
           <i class="lni lni-dashboard"></i>
           <span class="ms-1">Dashboard</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="pages/books/index.php">
+        <a class="nav-link" href="/digitalent-library/admin/books/index.php">
           <i class="lni lni-bookmark"></i>
           <span class="ms-1">Data Buku</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/digitalent-library/admin/members/index.php">
           <i class="lni lni-users"></i>
           <span class="ms-1">Data Anggota</span>
         </a>

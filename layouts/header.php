@@ -1,3 +1,10 @@
+<?php 
+    include(dirname(__DIR__) . "./config.php");
+    session_start();
+    if($_SESSION['status']!="login"){
+      header("location:../index.php");
+    }
+?>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -11,5 +18,4 @@
     <title>Hello, world!</title>
   </head>
   <body>
-
   <?php include(dirname(__DIR__) . "./layouts/navbar.php") ?>
