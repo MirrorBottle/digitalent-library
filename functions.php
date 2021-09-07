@@ -38,6 +38,12 @@ function store($table) {
 	
 }
 
+function delete($table, $id) {
+	global $connection;
+	mysqli_query($connection, "DELETE FROM $table WHERE id = $id");
+	return mysqli_affected_rows($connection) > 0;
+}
+
 function update($table) {
 	global $connection;
 	$id = $_POST['id'];

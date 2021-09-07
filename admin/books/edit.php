@@ -19,6 +19,16 @@
             <input value="<?= $book['id'] ?>" required type="hidden" name="id" class="form-control" id="id">
             <input value="<?= $book['cover'] ?>" required type="hidden" name="old_cover" class="form-control" id="id">
             <div class="mb-3">
+              <div div class="form-check form-check-inline">
+                <input <?= $book['is_borrowed'] == 1 ? 'checked' : '' ?> class="form-check-input" type="radio" name="is_borrowed" id="is_borrowed" value="1">
+                <label class="form-check-label" for="is_borrowed">Dipinjam</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input <?= $book['is_borrowed'] == 0 ? 'checked' : '' ?> class="form-check-input" type="radio" name="is_borrowed" id="is_not_borrowed" value="0">
+                <label class="form-check-label" for="is_not_borrowed">Tidak Dipinjam</label>
+              </div>
+            </div>
+            <div class="mb-3">
               <label for="title" class="form-label">Judul</label>
               <input value="<?= $book['title'] ?>" required type="text" name="title" class="form-control" id="title">
             </div>

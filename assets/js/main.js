@@ -2,7 +2,9 @@ $(function() {
   $("#datatable").DataTable();
 
   $(".delete-btn").on('click', function(e) {
+    e.preventDefault();
     const message = $(this).data('message');
+    const href = $(this).prop('href');
     Swal.fire({
       title: 'Apa anda yakin?',
       text: message,
@@ -14,11 +16,7 @@ $(function() {
       cancelButtonText: 'Batal'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+        window.location.href = href;
       }
     })
   })

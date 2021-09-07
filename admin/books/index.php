@@ -38,7 +38,7 @@
                   </td>
                   <td>
                     <a href="./edit.php?id=<?= $book['id'] ?>" class="btn btn-warning me-1">Ubah</a>
-                    <button type="button" data-message="Data buku akan dihapus!" class="btn btn-danger delete-btn">Hapus</button>
+                    <a href="./delete.php?id=<?= $book['id'] ?>" data-message="Data buku akan dihapus!" class="btn btn-danger delete-btn">Hapus</a>
                   </td>
                 </tr>
                 <?php $i++; ?>
