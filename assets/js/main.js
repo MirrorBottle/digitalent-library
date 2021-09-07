@@ -38,5 +38,24 @@ $(function() {
       $(this).addClass('to-open')
     }
   })
-  console.log('something');
+  function readURL(input, target) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        console.log(read, input, $(target));
+        reader.onload = function (e) {
+            $(target).attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $('.form-control-image-preview').on('change', function(e) {
+    const target = $(this).data('target');
+    if ($(this).prop('files') && $(this).prop('files')[0]) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+          $(target).attr('src', e.target.result);
+      };
+      reader.readAsDataURL($(this).prop('files')[0]);
+    }
+  })
 })

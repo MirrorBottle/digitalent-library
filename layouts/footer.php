@@ -6,5 +6,19 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/digitalent-library/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/digitalent-library/assets/js/main.js"></script>
+    <!-- <script>
+      $(function() {
+        function readURL(input, target) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              console.log(read, input, $(target));
+              reader.onload = function (e) {
+                  $(target).attr('src', e.target.result);
+              };
+              reader.readAsDataURL(input.files[0]);
+          }
+        }
+      })
+    </script> -->
   </body>
 </html>

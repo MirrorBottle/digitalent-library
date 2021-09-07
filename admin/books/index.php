@@ -27,22 +27,22 @@
               </tr>
             </thead>
             <tbody>
-              <?php if(mysqli_num_rows($books) > 0): ?>
-                <?php while($book = mysqli_fetch_assoc($books)): ?>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td><?= $book['title'] ?></td>
-                    <td><?= $book['category'] ?></td>
-                    <td>
-                      <span class="badge <?= $book['is_borrowed'] == 1 ? 'bg-danger' : 'bg-success' ?> w-100 p-2"><?= $book['is_borrowed'] == 1 ? 'Dipinjam' : 'Tersedia' ?> </span>
-                    </td>
-                    <td>
-                      <a href="./edit.php" class="btn btn-warning me-1">Ubah</a>
-                      <button type="button" data-message="Data buku akan dihapus!" class="btn btn-danger delete-btn">Hapus</button>
-                    </td>
-                  </tr>
-                <?php endwhile; ?>
-              <?php endif; ?>
+              <?php $i = 1; ?>
+              <?php foreach($books as $book): ?>
+                <tr>
+                  <th scope="row"><?= $i ?></th>
+                  <td><?= $book['title'] ?></td>
+                  <td><?= $book['category'] ?></td>
+                  <td>
+                    <span class="badge <?= $book['is_borrowed'] == 1 ? 'bg-danger' : 'bg-success' ?> w-100 p-2"><?= $book['is_borrowed'] == 1 ? 'Dipinjam' : 'Tersedia' ?> </span>
+                  </td>
+                  <td>
+                    <a href="./edit.php?id=<?= $book['id'] ?>" class="btn btn-warning me-1">Ubah</a>
+                    <button type="button" data-message="Data buku akan dihapus!" class="btn btn-danger delete-btn">Hapus</button>
+                  </td>
+                </tr>
+                <?php $i++; ?>
+              <?php endforeach; ?>
             </tbody>
           </table>
         </div>

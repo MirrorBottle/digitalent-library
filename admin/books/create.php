@@ -40,8 +40,9 @@
             </div>
             <div class="mb-3">
               <label for="cover" class="form-label">Cover Image</label>
-              <input required class="form-control" name="cover" accept="image/*" type="file" id="cover">
+              <input required class="form-control form-control-image-preview" data-target="#cover-image-preview" name="cover" accept="image/*" type="file" id="cover">
             </div>
+            <img class="img-fluid img-thumbnail" style="height: 150px;" id="cover-image-preview" src="http://placehold.it/180" alt="your image" />
           </div>
           <div class="card-footer d-flex align-items-center justify-content-end flex-row pt-2">
             <button type="reset" class="btn btn-info me-3">

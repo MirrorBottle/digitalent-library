@@ -4,7 +4,22 @@ include('config.php');
 function all($table) {
   global $connection;
   $result = mysqli_query($connection, "SELECT * FROM $table ORDER BY id DESC");
-  return $result;
+	$rows = [];
+	while($row = mysqli_fetch_assoc($result) ) {
+		$rows[] = $row;
+	}
+	return $rows;
+}
+
+
+function findById($table, $id) {
+	global $connection;
+	$result = mysqli_query($connection, "SELECT * FROM $table WHERE id = $id");
+  $rows = [];
+	while($row = mysqli_fetch_assoc($result) ) {
+		$rows[] = $row;
+	}
+	return $rows[0];
 }
 
 function store($table) {
@@ -21,6 +36,19 @@ function store($table) {
 	mysqli_query($connection, $query);
 	return mysqli_affected_rows($connection) > 0;
 	
+}
+
+function update($table) {
+	global $connection;
+	$id = $_POST['id'];
+	$values = [];
+	foreach ($_POST as $key => $value) {
+		$values[] = "$key = '$value'";
+	}
+	$values = join(", ", $values);
+	$query = "UPDATE $table SET $values WHERE id = $id";
+	mysqli_query($connection, $query);
+	return mysqli_affected_rows($connection) > 0;
 }
 
 function upload($field, $path = '../../img/') {
