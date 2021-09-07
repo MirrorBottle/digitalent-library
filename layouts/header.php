@@ -1,5 +1,5 @@
 <?php 
-    include(dirname(__DIR__) . "./config.php");
+    include(dirname(__DIR__) . "./functions.php");
     session_start();
     if($_SESSION['status']!="login"){
       header("location:../index.php");

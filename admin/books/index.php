@@ -6,6 +6,7 @@
   <div class="row">
     <?php include("../../layouts/sidebar.php") ?>
     <main role="main" class="col-md-9 offset-md-3 offset-lg-2 ml-sm-auto col-lg-10 px-4">
+      <?php include("../../layouts/flash.php") ?>
       <div class="card mt-4">
         <div class="card-header d-flex align-items-center justify-content-between">
           <h4>Daftar Buku</h4>
@@ -33,7 +34,7 @@
                     <td><?= $book['title'] ?></td>
                     <td><?= $book['category'] ?></td>
                     <td>
-                      <span class="badge bg-success w-100 p-2">Tersedia</span>
+                      <span class="badge <?= $book['is_borrowed'] == 1 ? 'bg-danger' : 'bg-success' ?> w-100 p-2"><?= $book['is_borrowed'] == 1 ? 'Dipinjam' : 'Tersedia' ?> </span>
                     </td>
                     <td>
                       <a href="./edit.php" class="btn btn-warning me-1">Ubah</a>
