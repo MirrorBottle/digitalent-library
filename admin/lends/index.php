@@ -46,8 +46,8 @@
                     <?php endif; ?>
                   </td>
                   <td>
-                    <a href="./edit.php?id=<?= $member['id'] ?>" class="btn btn-warning me-1">Ubah</a>
-                    <a href="./delete.php?id=<?= $member['id'] ?>" data-message="Data anggota akan dihapus!" class="btn btn-danger delete-btn">Hapus</a>
+                    <a href="./edit.php?id=<?= $lend['id'] ?>" class="btn btn-warning me-1">Ubah</a>
+                    <a href="./delete.php?id=<?= $lend['id'] ?>" data-message="Data anggota akan dihapus!" class="btn btn-danger delete-btn">Hapus</a>
                   </td>
                 </tr>
                 <?php $i++; ?>

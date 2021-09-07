@@ -12,7 +12,7 @@
       <div class="card mt-4">
         <form action="update.php" method="POST" enctype="multipart/form-data">
           <div class="card-header d-flex align-items-center justify-content-between">
-            <h4>Ubah Anggota</h4>
+            <h4>Ubah Peminjaman</h4>
             <a href="./index.php" class="btn btn-danger">
             <i class="lni lni-arrow-left-circle me-2"></i>
               Kembali
