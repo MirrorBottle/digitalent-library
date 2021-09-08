@@ -10,10 +10,16 @@
       <div class="card mt-4">
         <div class="card-header d-flex align-items-center justify-content-between">
           <h4>Daftar Anggota</h4>
-          <a href="./create.php" class="btn btn-primary">
-            <i class="lni lni-plus me-2"></i>
-            Tambah
-          </a>
+          <div>
+            <a href="./export.php" target="_blank" class="btn btn-success">
+              <i class="lni lni-download me-2"></i>
+              Export
+            </a>
+            <a href="./create.php" class="btn btn-primary">
+              <i class="lni lni-plus me-2"></i>
+              Tambah
+            </a>
+          </div>
         </div>
         <div class="card-body">
           <table id="datatable" class="table table-striped table-bordered datatable">

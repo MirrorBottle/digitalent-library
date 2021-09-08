@@ -1,5 +1,6 @@
 {
     "require": {
-        "nesbot/carbon": "^2.53"
+        "nesbot/carbon": "^2.53",
+        "phpoffice/phpspreadsheet": "^1.18"
     }
 }
