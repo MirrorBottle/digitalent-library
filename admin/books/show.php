@@ -21,34 +21,36 @@
           </a>
         </div>
         <div class="card-body">
-          <table class="table table-striped table-bordered datatable">
-            <tr>
-              <th width="250">Judul</th>
-              <td><?= $book['title'] ?></td>
-            </tr>
-            <tr>
-              <th width="250">Penulis</th>
-              <td><?= $book['author'] ?></td>
-            </tr>
-            <tr>
-              <th width="250">Kategori</th>
-              <td><?= $book['category'] ?></td>
-            </tr>
-            <tr>
-              <th width="250">Total Halaman</th>
-              <td><?= $book['pages'] ?></td>
-            </tr>
-            <tr>
-              <th width="250">Plot</th>
-              <td><?= $book['plot'] ?></td>
-            </tr>
-            <tr>
-              <th width="250">Cover Image</th>
-              <td>
-                <img class="img-fluid img-thumbnail" style="height: 150px;" id="cover-image-preview" src="/digitalent-library/img/<?= $book['cover'] ?>" alt="your image" />
-              </td>
-            </tr>
-          </table>
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img class="img-fluid img-thumbnail" style="height: 200px;" id="cover-image-preview" src="/digitalent-library/img/<?= $book['cover'] ?>" alt="your image" />
+            </div>
+            <div class="col-md-8">
+            <table class="table table-striped table-bordered datatable">
+              <tr>
+                <th width="250">Judul</th>
+                <td><?= $book['title'] ?></td>
+              </tr>
+              <tr>
+                <th width="250">Penulis</th>
+                <td><?= $book['author'] ?></td>
+              </tr>
+              <tr>
+                <th width="250">Kategori</th>
+                <td><?= $book['category'] ?></td>
+              </tr>
+              <tr>
+                <th width="250">Total Halaman</th>
+                <td><?= $book['pages'] ?></td>
+              </tr>
+              <tr>
+                <th width="250">Plot</th>
+                <td><?= $book['plot'] ?></td>
+              </tr>
+            </table>
+            </div>
+          </div>
+          
           <h5 class="mt-4 pt-2 mb-2">Daftar Histori Peminjaman</h5>
           <table id="datatable" class="table table-striped table-bordered datatable">
             <thead>

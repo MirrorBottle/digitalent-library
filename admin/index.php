@@ -13,6 +13,7 @@
     JOIN lends ON lend_details.lend_id = lends.id
     JOIN books ON lend_details.book_id = books.id
     JOIN members ON lends.member_id = members.id
+    ORDER BY id DESC
     LIMIT 3"
   );
 
@@ -22,7 +23,7 @@
     JOIN lends ON lend_details.lend_id = lends.id
     JOIN books ON lend_details.book_id = books.id
     JOIN members ON lends.member_id = members.id
-    WHERE lends.return_date IS NOT NULL LIMIT 3"
+    WHERE lends.return_date IS NOT NULL ORDER BY id DESC LIMIT 3"
   );
 ?>
 <div id="main-container" class="container-fluid">
@@ -92,7 +93,7 @@
                   <a href="/digitalent-library/admin/lends/show.php?id=<?= $lend['lends_id'] ?>" class="list-group-item list-group-item-action p-4" aria-current="true">
                     <div class="d-flex w-100 justify-content-between">
                       <h5 class="mb-1"><?= $lend['title'] ?> (<?= $lend['category'] ?>)</h5>
-                      <small><?= Carbon::parse($lend['lend_date'])->diffForHumans() ?></small>
+                      <small><?= format_date($lend['lend_date']) ?></small>
                     </div>
                     <p class="mb-1">Peminjam: <?= $lend['name'] ?></p>
                   </a>
@@ -106,7 +107,7 @@
                   <a href="/digitalent-library/admin/returns/show.php?id=<?= $return['lends_id'] ?>" class="list-group-item list-group-item-action p-4" aria-current="true">
                     <div class="d-flex w-100 justify-content-between">
                       <h5 class="mb-1"><?= $return['title'] ?> (<?= $return['category'] ?>)</h5>
-                      <small><?= Carbon::parse($return['return_date'])->diffForHumans() ?></small>
+                      <small><?= format_date($return['return_date']) ?></small>
                     </div>
                     <p class="mb-1">Peminjam: <?= $return['name'] ?></p>
                     <small>Tanggal Peminjaman: <?= Carbon::parse($return['lend_date'])->format('d M, Y') ?></small>
