@@ -43,6 +43,7 @@
                   <td><?= $member['email'] ?></td>
                   <td><?= $member['gender'] == 1 ? 'Perempuan' : 'Laki-laki' ?> </td>
                   <td>
+                    <a href="./print.php?id=<?= $member['id'] ?>" target="_blank" class="btn btn-primary me-1">Cetak</a>
                     <a href="./edit.php?id=<?= $member['id'] ?>" class="btn btn-warning me-1">Ubah</a>
                     <a href="./delete.php?id=<?= $member['id'] ?>" data-message="Data anggota akan dihapus!" class="btn btn-danger delete-btn">Hapus</a>
                   </td>
