@@ -11,10 +11,16 @@
       <div class="card mt-4">
         <div class="card-header d-flex align-items-center justify-content-between">
           <h4>Daftar Pengembalian</h4>
-          <a href="./create.php" class="btn btn-primary">
-            <i class="lni lni-plus me-2"></i>
-            Tambah
-          </a>
+          <div>
+            <a href="../lends/export.php?type=return" target="_blank" class="btn btn-success">
+              <i class="lni lni-download me-2"></i>
+              Export
+            </a>
+            <a href="./create.php" class="btn btn-primary">
+              <i class="lni lni-plus me-2"></i>
+              Tambah
+            </a>
+          </div>
         </div>
         <div class="card-body">
           <table id="datatable" class="table table-striped table-bordered datatable">
@@ -36,9 +42,10 @@
                     <th scope="row"><?= $i ?></th>
                     <td><?= $return['number'] ?></td>
                     <td><?= $member['name'] ?></td>
-                    <td><?= Carbon::parse($return['lend_date'])->format('d M, Y') ?></td>
-                    <td><?= Carbon::parse($return['return_date'])->format('d M, Y') ?></td>
+                    <td><?= format_date($return['lend_date']) ?></td>
+                    <td><?= format_date($return['return_date']) ?></td>
                     <td>
+                      <a href="./show.php?id=<?= $return['id'] ?>" class="btn btn-primary me-1">Detail</a>
                       <a href="./edit.php?id=<?= $return['id'] ?>" class="btn btn-warning me-1">Ubah</a>
                       <a href="./delete.php?id=<?= $return['id'] ?>" data-message="Data anggota akan dihapus!" class="btn btn-danger delete-btn">Hapus</a>
                     </td>

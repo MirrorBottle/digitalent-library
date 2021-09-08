@@ -47,6 +47,7 @@
                     <span class="badge <?= $book['is_borrowed'] == 1 ? 'bg-danger' : 'bg-success' ?> w-100 p-2"><?= $book['is_borrowed'] == 1 ? 'Dipinjam' : 'Tersedia' ?> </span>
                   </td>
                   <td>
+                    <a href="./show.php?id=<?= $book['id'] ?>" class="btn btn-primary me-1">Detail</a>
                     <a href="./edit.php?id=<?= $book['id'] ?>" class="btn btn-warning me-1">Ubah</a>
                     <a href="./delete.php?id=<?= $book['id'] ?>" data-message="Data buku akan dihapus!" class="btn btn-danger delete-btn">Hapus</a>
                   </td>

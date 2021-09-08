@@ -1,6 +1,6 @@
 <?php
 include('config.php');
-
+use Carbon\Carbon;
 
 function query($query) {
 	global $connection;
@@ -125,7 +125,10 @@ function upload($field, $path = '../../img/') {
 
 function flash($message, $type) {
 	$_SESSION['flash'][$type] = $message;
+}
 
+function format_date($date) {
+	return $date ? Carbon::parse($date)->format('d M, Y') : '-';
 }
 
 // LEND

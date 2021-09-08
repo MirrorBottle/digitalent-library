@@ -1,6 +1,29 @@
 <?php include("../layouts/header.php") ?>
-<?php 
-  $users = all("users");
+<?php
+  use Carbon\Carbon;
+  // INFOGRAPHICS
+  $members = query("SELECT COUNT(*) as count FROM members")[0];
+  $lends_count = mysqli_fetch_array(mysqli_query($connection, "SELECT COUNT(*) FROM lends"));
+  $returns_count = mysqli_fetch_array(mysqli_query($connection, "SELECT COUNT(return_date) FROM lends"));
+
+  // QUICK INFO
+  $lends = query("SELECT 
+    lends.id as lends_id, lend_details.id, books.title, books.category, members.name , lends.return_date, lends.lend_date
+    FROM lend_details 
+    JOIN lends ON lend_details.lend_id = lends.id
+    JOIN books ON lend_details.book_id = books.id
+    JOIN members ON lends.member_id = members.id
+    LIMIT 3"
+  );
+
+  $returns = query("SELECT 
+    lends.id as lends_id, lend_details.id, books.title, books.category, members.name, lends.return_date, lends.lend_date
+    FROM lend_details 
+    JOIN lends ON lend_details.lend_id = lends.id
+    JOIN books ON lend_details.book_id = books.id
+    JOIN members ON lends.member_id = members.id
+    WHERE lends.return_date IS NOT NULL LIMIT 3"
+  );
 ?>
 <div id="main-container" class="container-fluid">
   <div class="row">
@@ -16,8 +39,8 @@
                   <i style="font-size: 3rem" class="lni lni-exit-down lni-4x text-white"></i>
                 </div>
                 <div class="p-3 media-body">
-                  <h5>Pengembalian Hari Ini</h5>
-                  <h5 class="text-muted mb-0">28</h5>
+                  <h5>Total Pengembalian</h5>
+                  <h5 class="text-muted mb-0"><?= $returns_count[0] ?></h5>
                 </div>
               </div>
             </div>
@@ -31,8 +54,8 @@
                   <i style="font-size: 3rem" class="lni lni-exit-up lni-4x text-white"></i>
                 </div>
                 <div class="p-3 media-body">
-                  <h5>Peminjaman Hari Ini</h5>
-                  <h5 class="text-muted mb-0">28</h5>
+                  <h5>Total Peminjaman</h5>
+                  <h5 class="text-muted mb-0"><?= $lends_count[0] ?></h5>
                 </div>
               </div>
             </div>
@@ -47,7 +70,7 @@
                 </div>
                 <div class="p-3 media-body">
                   <h5>Total Anggota</h5>
-                  <h5 class="text-muted mb-0">28</h5>
+                  <h5 class="text-muted mb-0"><?= $members['count'] ?></h5>
                 </div>
               </div>
             </div>
@@ -61,64 +84,37 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-md-6 col-lg-6 col-12">
-              <h5>Pengembalian Buku</h5>
-              <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action p-4" aria-current="true">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">The Day (Novel)</h5>
-                    <small>1 jam lalu</small>
-                  </div>
-                  <p class="mb-1">Peminjam: Hiroto</p>
-                  <small>Tanggal Peminjaman: 12 September, 2019</small>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action p-4" aria-current="true">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Made By You (Novel)</h5>
-                    <small>2 jam lalu</small>
-                  </div>
-                  <p class="mb-1">Peminjam: Aris</p>
-                  <small>Tanggal Peminjaman: 12 September, 2019</small>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action p-4" aria-current="true">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">The Ash of Time (Novel)</h5>
-                    <small>4 jam lalu</small>
-                  </div>
-                  <p class="mb-1">Peminjam: Mai</p>
-                  <small>Tanggal Peminjaman: 12 September, 2019</small>
-                </a>
-              </div>
-            </div>
+
             <div class="col-md-6 col-lg-6 col-12">
               <h5>Peminjaman Buku</h5>
               <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action p-4" aria-current="true">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Paper Towns (Novel)</h5>
-                    <small>3 menit lalu</small>
-                  </div>
-                  <p class="mb-1">Peminjam: Hiroto</p>
-                  <small>Tanggal Pengembalian: 12 September, 2019</small>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action p-4" aria-current="true">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Land By The Sea (Novel)</h5>
-                    <small>15 menit lalu</small>
-                  </div>
-                  <p class="mb-1">Peminjam: Aris</p>
-                  <small>Tanggal Pengembalian: 12 September, 2019</small>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action p-4" aria-current="true">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Through Time We Met (Novel)</h5>
-                    <small>1 jam lalu</small>
-                  </div>
-                  <p class="mb-1">Peminjam: Mai</p>
-                  <small>Tanggal Pengembalian: 12 September, 2019</small>
-                </a>
+                <?php foreach($lends as $lend): ?>
+                  <a href="/digitalent-library/admin/lends/show.php?id=<?= $lend['lends_id'] ?>" class="list-group-item list-group-item-action p-4" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h5 class="mb-1"><?= $lend['title'] ?> (<?= $lend['category'] ?>)</h5>
+                      <small><?= Carbon::parse($lend['lend_date'])->diffForHumans() ?></small>
+                    </div>
+                    <p class="mb-1">Peminjam: <?= $lend['name'] ?></p>
+                  </a>
+                <?php endforeach; ?>
               </div>
             </div>
+            <div class="col-md-6 col-lg-6 col-12">
+              <h5>Pengembalian Buku</h5>
+              <div class="list-group">
+                <?php foreach($returns as $return): ?>
+                  <a href="/digitalent-library/admin/returns/show.php?id=<?= $return['lends_id'] ?>" class="list-group-item list-group-item-action p-4" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h5 class="mb-1"><?= $return['title'] ?> (<?= $return['category'] ?>)</h5>
+                      <small><?= Carbon::parse($return['return_date'])->diffForHumans() ?></small>
+                    </div>
+                    <p class="mb-1">Peminjam: <?= $return['name'] ?></p>
+                    <small>Tanggal Peminjaman: <?= Carbon::parse($return['lend_date'])->format('d M, Y') ?></small>
+                  </a>
+                <?php endforeach; ?>
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>
